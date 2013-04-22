@@ -10,19 +10,22 @@ HOST: http://api.extremmy.com/
 
 -- 
 Споты 
-Информация для отображения на карте
 --
 
 GET /spots/list{?$top,$skip}
 > Accept: application/json
+> If-Modified-Since: Mon, 3 Jun 2013 00:00:00 GMT
 < 200
 < Content-Type: application/json
+< Last-Modified: Mon, 3 Jun 2013 00:00:00 GMT
 [    
     {
         "ID": 1,
         "name": "Orient Jumping",
         "coordinate": [54.069073,-10.340239],
-        "sports": ["skydiving", "wakeboarding"]
+        "url": "http://www.extremmy.com",
+        "sports": ["skydiving", "wakeboarding"],
+        "rating": 3
     }
 ]
 
@@ -30,6 +33,7 @@ GET /spots/description/{id}/
 > Accept: text/html
 < 200
 < Content-Type: text/html
+< Last-Modified: Mon, 3 Jun 2013 00:00:00 GMT
 <p>
    Several paragraphs in light HTML markup 
 </p>
