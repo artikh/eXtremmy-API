@@ -9,12 +9,23 @@ HOST: http://api.extremmy.com/
 ---
 
 -- 
-Споты 
+Споты
 --
 
 GET /spots/list{?$top,$skip}
 > Accept: application/json
 > If-Modified-Since: Mon, 3 Jun 2013 00:00:00 GMT
+< 304
++++++
+< 503
+< Content-Type: application/json
+{ 
+    "error": 401,
+    "message": "Unknown error.",
+    "userMessage": "Unknown error. Please try again later."
+    
+}
++++++
 < 200
 < Content-Type: application/json
 < Last-Modified: Mon, 3 Jun 2013 00:00:00 GMT
@@ -31,6 +42,9 @@ GET /spots/list{?$top,$skip}
 
 GET /spots/description/{id}/
 > Accept: text/html
+> If-Modified-Since: Mon, 3 Jun 2013 00:00:00 GMT
+< 304
++++++
 < 200
 < Content-Type: text/html
 < Last-Modified: Mon, 3 Jun 2013 00:00:00 GMT
@@ -44,8 +58,18 @@ POST /spots/add
 { 
     "name": "My new point", 
     "coordinate": [55.990154,37.409945],
-    "sports": ["windserfing"]
+    "url": "http://www.extremmy.com",
+    "sports": ["skydiving"],
+    "rating": 3
 }
+< 401
+< Content-Type: application/json
+{ 
+    "error": 401,
+    "message": "Unauthorized user trying to add spot.",
+    "userMessage": "Please sign in."   
+}
++++++
 < 200
 < Content-Type: application/json
 { "ID": 42 }
